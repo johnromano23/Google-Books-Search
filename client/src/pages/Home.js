@@ -12,18 +12,20 @@ function Home() {
   const [books, setBooks] = useState([]);
   const [query, setQuery] = useState("");
   const [message, setMessage] = useState("Search For A Book To Begin!");
-  
+
   function handleInputChange(event) {
     const { value } = event.target;
-    console.log('Home - handleInputChange - value', value)
+    console.log("Home - handleInputChange - value", value);
     // ADD CODE TO MODIFY THE STATEFUL QUERY WITH VALUE
+    setQuery(value);
   }
 
   function getBooks() {
     API.getBooks(query)
-      .then((res) =>
+      .then((res) => {
         // ADD CODE TO MODIFY STATEFUL BOOKS WITH RES.DATA
-      )
+        setBooks(res.data);
+      })
       .catch(() => {
         setBooks([]);
         setMessage("No New Books Found, Try a Different Query");
@@ -37,7 +39,7 @@ function Home() {
 
   function handleBookSave(id) {
     const book = books.find((book) => book.id === id);
-    console.log('handleBookSave - id', id)
+    console.log("handleBookSave - id", id);
     API.saveBook({
       googleId: book.id,
       title: book.volumeInfo.title,
@@ -45,7 +47,7 @@ function Home() {
       link: book.volumeInfo.infoLink,
       authors: book.volumeInfo.authors,
       description: book.volumeInfo.description,
-      image: book.volumeInfo.imageLinks.thumbnail
+      image: book.volumeInfo.imageLinks.thumbnail,
     }).then(() => getBooks());
   }
 
@@ -87,8 +89,11 @@ function Home() {
                     description={book.volumeInfo.description}
                     image={book.volumeInfo.imageLinks.thumbnail}
                     // ADD ATTRIBUTE op AND ASSIGN "save" TO IT
+                    op="save"
                     // ADD ATTRIBUTE bookId AND ASSIGN book.id to it
+                    bookId={book.id}
                     // ADD ATTRIBUTE handleBookCallBack and ASSIGN handleBookSave CALLBACK TO IT
+                    handleBookCallBack={handleBookSave}
                   />
                 ))}
               </List>
