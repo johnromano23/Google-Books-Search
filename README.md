@@ -1,4 +1,4 @@
-# Google-Books-Search
+# Google Books Search
 
 ### Application Link
 https://jr-google-books-search.herokuapp.com/
