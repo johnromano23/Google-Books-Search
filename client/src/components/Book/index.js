@@ -3,18 +3,7 @@ import { ListItem } from "../List";
 import { Row, Col } from "../Grid";
 import "./style.css";
 
-function Book({
-  title,
-  subtitle,
-  authors,
-  link,
-  description,
-  image,
-  op,
-  bookId,
-  handleBookCallBack,
-}) {
-  console.log("Book");
+function Book({ title, subtitle, authors, link, description, image, Button }) {
   return (
     <ListItem>
       <Row className="flex-wrap-reverse">
@@ -32,18 +21,7 @@ function Book({
             >
               View
             </a>
-            <button
-              // ASSIGN handleBookCallBack EVENT CALLBACK PASSING IN BOOK ID bookId
-
-              // WRAP THIS handleBookCallBack CALLBACK INSIDE AN ARROW FUNCTION
-
-              // ASSIGN IT TO ONCLICK EVENT ATTRIBUTE
-
-              onClick={() => handleBookCallBack(bookId)}
-              className="btn btn-primary ml-2"
-            >
-              {op === "save" ? "Save" : "Delete"}
-            </button>
+            <Button />
           </div>
         </Col>
       </Row>
